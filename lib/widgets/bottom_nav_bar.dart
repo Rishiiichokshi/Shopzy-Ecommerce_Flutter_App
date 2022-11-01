@@ -5,6 +5,7 @@ import '../screens/cart_screen.dart';
 import '../screens/orders_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
+  static const routeName = '/bottomNavBar';
 
   @override
   State<BottomNavBar> createState() => _BottomNavBarState();

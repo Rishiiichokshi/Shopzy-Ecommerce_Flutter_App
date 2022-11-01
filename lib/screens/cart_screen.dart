@@ -33,7 +33,10 @@ class CartScreen extends StatelessWidget {
                     label: Text(
                       '\$${cart.totalAmount.toStringAsFixed(2)}',
                       style: TextStyle(
-                        color: Theme.of(context).primaryTextTheme.titleMedium.color,
+                        color: Theme.of(context)
+                            .primaryTextTheme
+                            .titleMedium
+                            .color,
                       ),
                     ),
                     backgroundColor: Theme.of(context).primaryColor,
@@ -79,24 +82,29 @@ class _OrderButtonState extends State<OrderButton> {
 
   @override
   Widget build(BuildContext context) {
-    return FlatButton(
-      child: _isLoading ? CircularProgressIndicator() : Text('ORDER NOW'),
+    return TextButton(
+      child: _isLoading
+          ? CircularProgressIndicator()
+          : Text(
+              'ORDER NOW',
+              style: TextStyle(color: Colors.blue),
+            ),
       onPressed: (widget.cart.totalAmount <= 0 || _isLoading)
           ? null
           : () async {
-        setState(() {
-          _isLoading = true;
-        });
-        await Provider.of<Orders>(context, listen: false).addOrder(
-          widget.cart.items.values.toList(),
-          widget.cart.totalAmount,
-        );
-        setState(() {
-          _isLoading = false;
-        });
-        widget.cart.clear();
-      },
-      textColor: Theme.of(context).primaryColor,
+              setState(() {
+                _isLoading = true;
+              });
+              await Provider.of<Orders>(context, listen: false).addOrder(
+                widget.cart.items.values.toList(),
+                widget.cart.totalAmount,
+              );
+              setState(() {
+                _isLoading = false;
+              });
+              widget.cart.clear();
+            },
+      // textColor: Theme.of(context).primaryColor,
     );
   }
 }

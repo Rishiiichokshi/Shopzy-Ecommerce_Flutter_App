@@ -6,6 +6,7 @@ import '../providers/cart.dart';
 import '../widgets/app_drawer.dart';
 import '../widgets/badge.dart';
 import '../widgets/products_grid.dart';
+import '../widgets/bottom_nav_bar.dart';
 import '../widgets/search_items.dart';
 import '../providers/products.dart';
 
@@ -50,7 +51,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('MyShop'),
+        title: Text('Shopzy'),
         actions: <Widget>[
           PopupMenuButton(
             onSelected: (FilterOptions selectedValue) {
