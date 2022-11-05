@@ -1,4 +1,4 @@
-# SHOPYZY Commerce Complate App - Flutter
+# SHOPZY Commerce Complate App - Flutter
 
 Tech Stack:
 ● Flutter
