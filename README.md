@@ -1,16 +1,29 @@
-# shop_app
+# SHOPZY Commerce Complate App - Flutter
 
-A new Flutter project.
+Tech Stack:
+● Flutter
+● Firebase
 
-## Getting Started
+Features 🔥
+● Login
 
-This project is a starting point for a Flutter application.
+● Signup
 
-A few resources to get you started if this is your first Flutter project:
+● Social Login
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+● Recover Account
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+● Cart (List)
+
+● Add To Cart
+
+● Remove Cart
+
+● Category
+
+● Profile
+
+● Order History
+
+
+
