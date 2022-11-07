@@ -103,6 +103,9 @@ class Products with ChangeNotifier {
   ];
 
   // var _showFavoritesOnly = false;
+  final String authtoken;
+
+  Products(this.authtoken, this._items);
 
   List<Product> get items {
     // if (_showFavoritesOnly) {
@@ -130,7 +133,8 @@ class Products with ChangeNotifier {
   // }
 
   Future<void> fetchAndSetProducts() async {
-    var url = Uri.parse('https://myshopapp-90643-default-rtdb.firebaseio.com/products.json');
+    //we arr using the token here by constructor
+    final url = Uri.parse('https://myshopapp-90643-default-rtdb.firebaseio.com/products.json?auth=$authtoken');
     try {
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
@@ -157,7 +161,7 @@ class Products with ChangeNotifier {
   }
 
   Future<void> addProduct(Product product) {
-    var url = Uri.parse('https://myshopapp-90643-default-rtdb.firebaseio.com/products.json');
+    var url = Uri.parse('https://myshopapp-90643-default-rtdb.firebaseio.com/products.json?auth=$authtoken');
     return http.post(url, body: json.encode({
       'title': product.title,
       'description': product.description,
@@ -183,7 +187,7 @@ class Products with ChangeNotifier {
   Future<void> updateProduct(String id, Product newProduct) async {
     final prodIndex = _items.indexWhere((prod) => prod.id == id);
     if(prodIndex >= 0) {
-      final url = Uri.parse('https://myshopapp-90643-default-rtdb.firebaseio.com/products/$id.json');
+      final url = Uri.parse('https://myshopapp-90643-default-rtdb.firebaseio.com/products/$id.json?auth=$authtoken');
       await http.patch(url, body: json.encode({
         'title': newProduct.title,
         'description': newProduct.description,
@@ -198,7 +202,7 @@ class Products with ChangeNotifier {
   }
 
   void deleteProducts(String id) {
-    final url = Uri.parse('https://myshopapp-90643-default-rtdb.firebaseio.com/products/$id.json');
+    final url = Uri.parse('https://myshopapp-90643-default-rtdb.firebaseio.com/products/$id.json?auth=$authtoken');
     final existingProductIndex = _items.indexWhere((prod) => prod.id == id);
     var existingProduct = _items[existingProductIndex];
     http.delete(url).then((_) {
