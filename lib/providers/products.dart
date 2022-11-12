@@ -104,8 +104,9 @@ class Products with ChangeNotifier {
 
   // var _showFavoritesOnly = false;
   final String authtoken;
+  final String userId;
 
-  Products(this.authtoken, this._items);
+  Products(this.authtoken, this.userId, this._items);
 
   List<Product> get items {
     // if (_showFavoritesOnly) {
@@ -132,15 +133,20 @@ class Products with ChangeNotifier {
   //   notifyListeners();
   // }
 
-  Future<void> fetchAndSetProducts() async {
+  Future<void> fetchAndSetProducts([bool filterByUser = false]) async {
+    final filterString = filterByUser ? 'orderBy="creatorId"&equalTo="$userId"' : '';
     //we arr using the token here by constructor
-    final url = Uri.parse('https://myshopapp-90643-default-rtdb.firebaseio.com/products.json?auth=$authtoken');
+    var url = Uri.parse('https://myshopapp-90643-default-rtdb.firebaseio.com/products.json?auth=$authtoken&$filterString');
     try {
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
       if(extractedData == null) {
         return;
       }
+      url = Uri.parse(
+          'https://myshopapp-90643-default-rtdb.firebaseio.com/userFavourites/$userId.json?auth=$authtoken');
+      final favouriteResponse = await http.get(url);
+      final favouriteData = json.decode(favouriteResponse.body);
       final List<Product> loadedProducts = [];
       extractedData.forEach((prodId, prodData) {
         loadedProducts.add(Product(
@@ -148,7 +154,7 @@ class Products with ChangeNotifier {
           title: prodData['title'],
           description: prodData['description'],
           price: prodData['price'],
-          isFavorite: prodData['isFavourite'],
+          isFavorite: favouriteData == null ? false : favouriteData[prodId] ?? false,
           imageUrl: prodData['imageUrl'],
         ));
       });
@@ -167,14 +173,15 @@ class Products with ChangeNotifier {
       'description': product.description,
       'price': product.price,
       'imageUrl': product.imageUrl,
-      'isFavourite': product.isFavorite,
+      'creatorId': userId,
     })).then((response) {
       final newProduct = Product(
           id: json.decode(response.body)['name'],
           title: product.title,
           price: product.price,
           description: product.description,
-          imageUrl: product.imageUrl);
+          imageUrl: product.imageUrl,
+      );
       _items.add(newProduct);
 
       notifyListeners();
