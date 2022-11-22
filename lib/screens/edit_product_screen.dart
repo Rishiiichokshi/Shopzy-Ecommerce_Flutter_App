@@ -253,6 +253,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                   ),
                                 ),
                         ),
+
                         Expanded(
                           child: TextFormField(
                             decoration: InputDecoration(labelText: 'Image URL'),
