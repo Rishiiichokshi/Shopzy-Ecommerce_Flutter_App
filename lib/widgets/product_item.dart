@@ -34,7 +34,7 @@ class ProductItem extends StatelessWidget {
           ),
         ),
         footer: GridTileBar(
-          backgroundColor: Colors.black54,
+          backgroundColor: Colors.white,
           leading: Consumer<Product>(
             builder: (ctx, product, _) => IconButton(
               icon: Icon(
@@ -49,6 +49,7 @@ class ProductItem extends StatelessWidget {
           title: Text(
             product.title,
             textAlign: TextAlign.center,
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 14),
           ),
           trailing: IconButton(
             icon: Icon(
@@ -76,3 +77,114 @@ class ProductItem extends StatelessWidget {
     );
   }
 }
+
+
+//new UI for product screen just some changes needed
+
+// import 'package:flutter/cupertino.dart';
+// import 'package:flutter/material.dart';
+// import 'package:provider/provider.dart';
+//
+// import '../providers/product.dart';
+// import '../providers/cart.dart';
+// import '../providers/auth.dart';
+// import '../screens/product_detail_screen.dart';
+//
+// class ProductItem extends StatelessWidget {
+//   const ProductItem({Key key}) : super(key: key);
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     final product = Provider.of<Product>(context, listen: false);
+//     final cart = Provider.of<Cart>(context, listen: false);
+//     final authData = Provider.of<Auth>(context, listen: false);
+//     return Container(
+//       padding: EdgeInsets.only(left: 15, right: 15, top: 10),
+//       margin: EdgeInsets.symmetric(vertical: 8, horizontal: 6),
+//
+//       decoration: BoxDecoration(
+//         borderRadius: BorderRadius.circular(12),
+//         color: Colors.white,
+//       ),
+//       child: Column(
+//         children: [
+//           InkWell(
+//               onTap: () {},
+//               child: ClipRRect(
+//                 borderRadius: BorderRadius.circular(30), // Image border
+//                 child: SizedBox.fromSize(
+//                   size: Size.fromRadius(90), // Image radius
+//                   child: GestureDetector(
+//                     onTap: () {
+//                       Navigator.of(context).pushNamed(
+//                         ProductDetailScreen.routeName,
+//                         arguments: product.id,
+//                       );
+//                     },
+//                     child: Image.network(
+//                       product.imageUrl,
+//                       height: 190,
+//                       width: 170,
+//                     ),
+//                   ),
+//                 ),
+//               )
+//           ),
+//           Padding(
+//             padding: EdgeInsets.only(bottom: 8, top: 8),
+//             child: Container(
+//               alignment: Alignment.centerLeft,
+//               child: Text(
+//                 product.title,
+//                 style: TextStyle(
+//                   fontSize: 18,
+//                   fontWeight: FontWeight.bold,
+//                   color: Colors.black54,
+//                 ),
+//               ),
+//             ),
+//           ), Container(
+//             alignment: Alignment.centerLeft,
+//             child: Text(
+//               product.description,
+//               style: TextStyle(
+//                   fontSize: 15,
+//                   color: Colors.black54,
+//                   overflow: TextOverflow.ellipsis
+//               ),
+//             ),
+//           ),
+//           Padding(
+//             padding: EdgeInsets.only(top: 15),
+//             child: Row(
+//               mainAxisAlignment: MainAxisAlignment.start,
+//               children: [
+//                 Container(
+//                   height: 17,
+//                   padding: EdgeInsets.only(right: 70),
+//                   child: FittedBox(
+//                     child: Text(
+//                       '${product.price}',
+//                       style: TextStyle(
+//                         fontSize: 20,
+//                         fontWeight: FontWeight.bold,
+//                         color: Colors.blue,
+//                       ),
+//                     ),
+//                   ),
+//                 ),
+//                 Container(
+//                   padding: EdgeInsets.only(left: 2),
+//                   child: Icon(
+//                     CupertinoIcons.cart_badge_plus,
+//                     color: Colors.blue,
+//                   ),
+//                 )
+//               ],
+//             ),
+//           )
+//         ],
+//       ),
+//     );
+//   }
+// }
